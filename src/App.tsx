@@ -5,6 +5,8 @@ import CalendlyModal from './components/CalendlyModal';
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
+  const [faqDropdownOpen, setFaqDropdownOpen] = useState(false);
+  const [articlesDropdownOpen, setArticlesDropdownOpen] = useState(false);
   const [calendlyModalOpen, setCalendlyModalOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const calendlyUrl = import.meta.env.VITE_CALENDLY_URL || '';
@@ -21,58 +23,122 @@ function App() {
     <div className="min-h-screen bg-gradient-to-b from-white to-[#779979]/5">
       <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="flex items-center justify-between h-20">
+          {/* Logo centré */}
+          <div className="flex justify-center py-4">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="flex items-center"
             >
               <img
-                src="/screenshot3.png"
-                alt="Parcel. - Logo"
+                src="/logo.png"
+                alt="Logo"
                 className="h-14 md:h-16 w-auto"
               />
             </button>
-
-            <div className="hidden md:flex items-center gap-8 ml-auto pl-12">
-              <div className="relative"
-                onMouseEnter={() => setAboutDropdownOpen(true)}
-                onMouseLeave={() => setAboutDropdownOpen(false)}
-              >
-                <button className="text-gray-600 hover:text-[#779979] transition-colors flex items-center gap-1 font-medium">
-                  Qui sommes-nous
-                  <ChevronDown size={16} className={`transition-transform ${aboutDropdownOpen ? 'rotate-180' : ''}`} />
-                </button>
-                {aboutDropdownOpen && (
-                  <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-2xl shadow-lg border border-gray-100 py-2">
-                    <button onClick={() => scrollToSection('evars')} className="w-full text-left px-4 py-3 text-gray-600 hover:bg-[#779979]/5 hover:text-[#779979] transition-colors">
-                      EVARS : Qu'est-ce que c'est ?
-                    </button>
-                    <button onClick={() => scrollToSection('thematiques')} className="w-full text-left px-4 py-3 text-gray-600 hover:bg-[#779979]/5 hover:text-[#779979] transition-colors">
-                      Les différentes thématiques
-                    </button>
-                    <button onClick={() => scrollToSection('public')} className="w-full text-left px-4 py-3 text-gray-600 hover:bg-[#779979]/5 hover:text-[#779979] transition-colors">
-                      Notre public
-                    </button>
-                  </div>
-                )}
-              </div>
-              <button onClick={() => scrollToSection('conferences')} className="text-gray-600 hover:text-[#779979] transition-colors font-medium">
-                Conférences
+          </div>
+          
+          {/* Menu de navigation */}
+          <div className="hidden md:flex items-center justify-center gap-8 pb-4">
+            <div className="relative"
+              onMouseEnter={() => setAboutDropdownOpen(true)}
+              onMouseLeave={() => setAboutDropdownOpen(false)}
+            >
+              <button className="relative text-gray-600 hover:text-[#779979] transition-colors flex items-center gap-1 font-medium after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-[-4px] after:left-1/2 after:-translate-x-1/2 after:bg-[#779979] after:transition-all after:duration-300 hover:after:w-full">
+                Qui sommes-nous
+                <ChevronDown size={16} className={`transition-transform ${aboutDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
-              <button onClick={() => scrollToSection('outils')} className="text-gray-600 hover:text-[#779979] transition-colors font-medium">
-                Nos outils
-              </button>
-              <button
-                onClick={() => setCalendlyModalOpen(true)}
-                className="bg-[#779979] text-white px-6 py-2.5 rounded-full hover:bg-[#658968] transition-all hover:scale-105 font-medium shadow-md"
-              >
-                Contact
-              </button>
+              {aboutDropdownOpen && (
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-white rounded-2xl shadow-lg border border-gray-100 py-2">
+                  <button onClick={() => scrollToSection('evars')} className="w-full text-left px-4 py-3 text-gray-600 hover:bg-[#779979]/5 hover:text-[#779979] transition-colors">
+                    EVARS : Qu'est-ce que c'est ?
+                  </button>
+                  <button onClick={() => scrollToSection('thematiques')} className="w-full text-left px-4 py-3 text-gray-600 hover:bg-[#779979]/5 hover:text-[#779979] transition-colors">
+                    Les différentes thématiques
+                  </button>
+                  <button onClick={() => scrollToSection('public')} className="w-full text-left px-4 py-3 text-gray-600 hover:bg-[#779979]/5 hover:text-[#779979] transition-colors">
+                    Notre public
+                  </button>
+                </div>
+              )}
             </div>
+            <button onClick={() => scrollToSection('conferences')} className="relative text-gray-600 hover:text-[#779979] transition-colors font-medium after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-[-4px] after:left-1/2 after:-translate-x-1/2 after:bg-[#779979] after:transition-all after:duration-300 hover:after:w-full">
+              Conférences
+            </button>
+            <button onClick={() => scrollToSection('outils')} className="relative text-gray-600 hover:text-[#779979] transition-colors font-medium after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-[-4px] after:left-1/2 after:-translate-x-1/2 after:bg-[#779979] after:transition-all after:duration-300 hover:after:w-full">
+              Nos outils
+            </button>
+            <div className="relative"
+              onMouseEnter={() => setArticlesDropdownOpen(true)}
+              onMouseLeave={() => setArticlesDropdownOpen(false)}
+            >
+              <button className="relative text-gray-600 hover:text-[#779979] transition-colors flex items-center gap-1 font-medium after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-[-4px] after:left-1/2 after:-translate-x-1/2 after:bg-[#779979] after:transition-all after:duration-300 hover:after:w-full">
+                Articles
+                <ChevronDown size={16} className={`transition-transform ${articlesDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {articlesDropdownOpen && (
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-80 bg-white rounded-2xl shadow-lg border border-gray-100 py-2 z-50">
+                  <button onClick={() => { scrollToSection('articles'); setArticlesDropdownOpen(false); }} className="w-full text-left px-4 py-3 text-gray-600 hover:bg-[#779979]/5 hover:text-[#779979] transition-colors">
+                    L'importance de l'éducation affective et relationnelle
+                  </button>
+                  <button onClick={() => { scrollToSection('articles'); setArticlesDropdownOpen(false); }} className="w-full text-left px-4 py-3 text-gray-600 hover:bg-[#779979]/5 hover:text-[#779979] transition-colors">
+                    Comment parler de sexualité avec ses enfants ?
+                  </button>
+                  <button onClick={() => { scrollToSection('articles'); setArticlesDropdownOpen(false); }} className="w-full text-left px-4 py-3 text-gray-600 hover:bg-[#779979]/5 hover:text-[#779979] transition-colors">
+                    Le consentement : un concept clé
+                  </button>
+                  <button onClick={() => { scrollToSection('articles'); setArticlesDropdownOpen(false); }} className="w-full text-left px-4 py-3 text-gray-600 hover:bg-[#779979]/5 hover:text-[#779979] transition-colors">
+                    L'EVARS en milieu scolaire
+                  </button>
+                </div>
+              )}
+            </div>
+            <div className="relative"
+              onMouseEnter={() => setFaqDropdownOpen(true)}
+              onMouseLeave={() => setFaqDropdownOpen(false)}
+            >
+              <button className="relative text-gray-600 hover:text-[#779979] transition-colors flex items-center gap-1 font-medium after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-[-4px] after:left-1/2 after:-translate-x-1/2 after:bg-[#779979] after:transition-all after:duration-300 hover:after:w-full">
+                FAQ
+                <ChevronDown size={16} className={`transition-transform ${faqDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {faqDropdownOpen && (
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-96 bg-white rounded-2xl shadow-lg border border-gray-100 py-2 z-50 max-h-96 overflow-y-auto">
+                  <button onClick={() => { scrollToSection('faq'); setFaqDropdownOpen(false); }} className="w-full text-left px-4 py-3 text-gray-600 hover:bg-[#779979]/5 hover:text-[#779979] transition-colors">
+                    Quelle est la durée d'une intervention ?
+                  </button>
+                  <button onClick={() => { scrollToSection('faq'); setFaqDropdownOpen(false); }} className="w-full text-left px-4 py-3 text-gray-600 hover:bg-[#779979]/5 hover:text-[#779979] transition-colors">
+                    Quels sont les tarifs ?
+                  </button>
+                  <button onClick={() => { scrollToSection('faq'); setFaqDropdownOpen(false); }} className="w-full text-left px-4 py-3 text-gray-600 hover:bg-[#779979]/5 hover:text-[#779979] transition-colors">
+                    Comment organiser une intervention ?
+                  </button>
+                  <button onClick={() => { scrollToSection('faq'); setFaqDropdownOpen(false); }} className="w-full text-left px-4 py-3 text-gray-600 hover:bg-[#779979]/5 hover:text-[#779979] transition-colors">
+                    Les interventions respectent-elles le cadre légal ?
+                  </button>
+                  <button onClick={() => { scrollToSection('faq'); setFaqDropdownOpen(false); }} className="w-full text-left px-4 py-3 text-gray-600 hover:bg-[#779979]/5 hover:text-[#779979] transition-colors">
+                    À partir de quel âge peut-on bénéficier d'une intervention EVARS ?
+                  </button>
+                  <button onClick={() => { scrollToSection('faq'); setFaqDropdownOpen(false); }} className="w-full text-left px-4 py-3 text-gray-600 hover:bg-[#779979]/5 hover:text-[#779979] transition-colors">
+                    Les parents sont-ils informés des interventions ?
+                  </button>
+                  <button onClick={() => { scrollToSection('faq'); setFaqDropdownOpen(false); }} className="w-full text-left px-4 py-3 text-gray-600 hover:bg-[#779979]/5 hover:text-[#779979] transition-colors">
+                    Proposez-vous des interventions individuelles ?
+                  </button>
+                </div>
+              )}
+            </div>
+            <button
+              onClick={() => setCalendlyModalOpen(true)}
+              className="bg-[#779979] text-white px-6 py-2.5 rounded-full hover:bg-[#658968] transition-all hover:scale-105 font-medium shadow-md"
+            >
+              Contact
+            </button>
+          </div>
 
+          {/* Menu mobile */}
+          <div className="md:hidden pb-4">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden text-gray-700"
+              className="text-gray-700"
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -106,6 +172,59 @@ function App() {
                 <button onClick={() => scrollToSection('outils')} className="text-gray-600 hover:text-[#779979] transition-colors text-left font-medium">
                   Nos outils
                 </button>
+                <div>
+                  <button onClick={() => setArticlesDropdownOpen(!articlesDropdownOpen)} className="text-gray-600 hover:text-[#779979] transition-colors text-left flex items-center gap-1 w-full font-medium">
+                    Articles
+                    <ChevronDown size={16} className={`transition-transform ${articlesDropdownOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {articlesDropdownOpen && (
+                    <div className="ml-4 mt-2 flex flex-col gap-2">
+                      <button onClick={() => { scrollToSection('articles'); setArticlesDropdownOpen(false); }} className="text-gray-600 hover:text-[#779979] transition-colors text-left text-sm">
+                        L'importance de l'éducation affective
+                      </button>
+                      <button onClick={() => { scrollToSection('articles'); setArticlesDropdownOpen(false); }} className="text-gray-600 hover:text-[#779979] transition-colors text-left text-sm">
+                        Comment parler de sexualité avec ses enfants ?
+                      </button>
+                      <button onClick={() => { scrollToSection('articles'); setArticlesDropdownOpen(false); }} className="text-gray-600 hover:text-[#779979] transition-colors text-left text-sm">
+                        Le consentement : un concept clé
+                      </button>
+                      <button onClick={() => { scrollToSection('articles'); setArticlesDropdownOpen(false); }} className="text-gray-600 hover:text-[#779979] transition-colors text-left text-sm">
+                        L'EVARS en milieu scolaire
+                      </button>
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <button onClick={() => setFaqDropdownOpen(!faqDropdownOpen)} className="text-gray-600 hover:text-[#779979] transition-colors text-left flex items-center gap-1 w-full font-medium">
+                    FAQ
+                    <ChevronDown size={16} className={`transition-transform ${faqDropdownOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {faqDropdownOpen && (
+                    <div className="ml-4 mt-2 flex flex-col gap-2">
+                      <button onClick={() => { scrollToSection('faq'); setFaqDropdownOpen(false); }} className="text-gray-600 hover:text-[#779979] transition-colors text-left text-sm">
+                        Durée d'une intervention
+                      </button>
+                      <button onClick={() => { scrollToSection('faq'); setFaqDropdownOpen(false); }} className="text-gray-600 hover:text-[#779979] transition-colors text-left text-sm">
+                        Tarifs
+                      </button>
+                      <button onClick={() => { scrollToSection('faq'); setFaqDropdownOpen(false); }} className="text-gray-600 hover:text-[#779979] transition-colors text-left text-sm">
+                        Organiser une intervention
+                      </button>
+                      <button onClick={() => { scrollToSection('faq'); setFaqDropdownOpen(false); }} className="text-gray-600 hover:text-[#779979] transition-colors text-left text-sm">
+                        Cadre légal
+                      </button>
+                      <button onClick={() => { scrollToSection('faq'); setFaqDropdownOpen(false); }} className="text-gray-600 hover:text-[#779979] transition-colors text-left text-sm">
+                        À partir de quel âge ?
+                      </button>
+                      <button onClick={() => { scrollToSection('faq'); setFaqDropdownOpen(false); }} className="text-gray-600 hover:text-[#779979] transition-colors text-left text-sm">
+                        Information des parents
+                      </button>
+                      <button onClick={() => { scrollToSection('faq'); setFaqDropdownOpen(false); }} className="text-gray-600 hover:text-[#779979] transition-colors text-left text-sm">
+                        Interventions individuelles
+                      </button>
+                    </div>
+                  )}
+                </div>
                 <button
                   onClick={() => setCalendlyModalOpen(true)}
                   className="bg-[#779979] text-white px-6 py-2.5 rounded-full hover:bg-[#658968] transition-colors text-left font-medium"
@@ -118,29 +237,119 @@ function App() {
         </div>
       </nav>
 
-      <section className="pt-32 pb-24 px-6 lg:px-12">
+      <section className="pt-40 pb-24 px-6 lg:px-12 bg-[#FFFFFF]">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center">
-            <h1 className="text-5xl lg:text-7xl font-semibold text-gray-900 mb-6 leading-tight">
-              Éducation Affective<br />et Relationnelle
-            </h1>
-            <p className="text-xl lg:text-2xl text-[#779979] font-medium mb-8">
-              EVARS — Mouvaux, France
-            </p>
-            <p className="text-lg text-gray-600 leading-relaxed mb-10 max-w-3xl mx-auto">
-              Accompagner les jeunes et les adultes dans leur développement affectif, relationnel et sexuel avec bienveillance et professionnalisme.
-            </p>
-            <button
-              onClick={() => setCalendlyModalOpen(true)}
-              className="bg-[#779979] text-white px-10 py-4 rounded-full text-lg hover:bg-[#658968] transition-all hover:scale-105 font-medium shadow-lg"
-            >
-              Prendre rendez-vous
-            </button>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Texte à gauche */}
+            <div className="text-left">
+              <h1 className="text-5xl lg:text-7xl font-semibold text-gray-900 mb-6 leading-tight">
+                Éducation Affective<br />et Relationnelle
+              </h1>
+              <p className="text-xl lg:text-2xl text-[#779979] font-medium mb-8">
+                EVARS — Mouvaux, France
+              </p>
+              <p className="text-lg text-gray-600 leading-relaxed mb-10">
+                Accompagner les jeunes et les adultes dans leur développement affectif, relationnel et sexuel avec bienveillance et professionnalisme.
+              </p>
+              <button
+                onClick={() => setCalendlyModalOpen(true)}
+                className="bg-[#779979] text-white px-10 py-4 rounded-full text-lg hover:bg-[#658968] transition-all hover:scale-105 font-medium shadow-lg"
+              >
+                Prendre rendez-vous
+              </button>
+            </div>
+            {/* Image à droite */}
+            <div className="relative flex items-center justify-center">
+              <div className="relative w-3/5 max-w-md">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#779979]/20 to-transparent rounded-3xl blur-xl"></div>
+                <img
+                  src="/design-hero.png"
+                  alt="Éducation Affective et Relationnelle"
+                  className="relative w-full rounded-3xl shadow-lg opacity-90"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="py-24 px-6 lg:px-12">
+      {/* Section EVARS */}
+      <section id="evars" className="py-24 px-6 lg:px-12 bg-gradient-to-br from-[#779979]/5 to-transparent">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-semibold text-gray-900 mb-6">
+              Qu'est-ce que l'EVARS ?
+            </h2>
+            <p className="text-xl text-[#779979] font-medium mb-4">
+              Éducation à la Vie Affective, Relationnelle et Sexuelle
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-12 items-start mb-12">
+            <div className="bg-white p-8 rounded-3xl shadow-lg">
+              <div className="w-16 h-16 mb-6 bg-gradient-to-br from-[#779979] to-[#658968] rounded-2xl flex items-center justify-center">
+                <BookOpen size={32} className="text-white" />
+              </div>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-4">Une approche globale</h3>
+              <p className="text-gray-600 leading-relaxed">
+                L'EVARS ne se limite pas à l'aspect biologique de la sexualité. Elle englobe l'ensemble des dimensions de la vie affective et relationnelle : les émotions, le respect, le consentement, la communication, et la construction de relations saines et épanouissantes.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-3xl shadow-lg">
+              <div className="w-16 h-16 mb-6 bg-gradient-to-br from-[#779979] to-[#658968] rounded-2xl flex items-center justify-center">
+                <Users size={32} className="text-white" />
+              </div>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-4">Adaptée à chaque âge</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Les interventions EVARS sont conçues pour s'adapter au niveau de développement et à la maturité de chaque groupe. Du CM2 à la terminale, le contenu et les méthodes pédagogiques sont ajustés pour être appropriés et compréhensibles.
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-white p-10 rounded-3xl shadow-lg">
+            <h3 className="text-2xl font-semibold text-gray-900 mb-6 text-center">Les objectifs de l'EVARS</h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="text-center">
+                <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-[#779979] to-[#658968] rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <h4 className="font-semibold text-gray-900 mb-2">Développer l'estime de soi</h4>
+                <p className="text-sm text-gray-600">Renforcer la confiance en soi et l'acceptation de son corps</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-[#779979] to-[#658968] rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                  </svg>
+                </div>
+                <h4 className="font-semibold text-gray-900 mb-2">Comprendre le consentement</h4>
+                <p className="text-sm text-gray-600">Apprendre à respecter les limites et à exprimer ses besoins</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-[#779979] to-[#658968] rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                  </svg>
+                </div>
+                <h4 className="font-semibold text-gray-900 mb-2">Améliorer la communication</h4>
+                <p className="text-sm text-gray-600">Développer des compétences pour des relations saines</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 bg-gradient-to-br from-[#779979] to-[#658968] p-10 rounded-3xl text-white text-center">
+            <h3 className="text-2xl font-semibold mb-4">Un cadre légal et éthique</h3>
+            <p className="text-lg leading-relaxed max-w-3xl mx-auto">
+              L'EVARS s'inscrit dans le cadre de la loi relative à l'éducation à la sexualité. Elle respecte les recommandations du Ministère de l'Éducation Nationale et est toujours menée en collaboration avec les équipes éducatives et les familles.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 px-6 lg:px-12 bg-[#FAFAFA]">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl lg:text-5xl font-semibold text-gray-900 mb-20 text-center">
             Qui suis-je ?
@@ -148,8 +357,8 @@ function App() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative">
               <img
-                src="/image.png"
-                alt="Géraldine Barbry - Thérapeute de couple sur Lille"
+                src="/screenshot1.png"
+                alt="Géraldine Barbry - Conseillère conjugale et familiale"
                 className="w-full rounded-3xl shadow-2xl"
               />
             </div>
@@ -442,7 +651,61 @@ function App() {
         </div>
       </section>
 
-      <section className="py-24 px-6 lg:px-12 bg-gradient-to-br from-[#779979]/5 to-transparent">
+      {/* Section Articles */}
+      <section id="articles" className="py-24 px-6 lg:px-12">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl lg:text-5xl font-semibold text-gray-900 mb-16 text-center">
+            Articles et ressources
+          </h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <article className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all">
+              <div className="w-16 h-16 mb-6 bg-gradient-to-br from-[#779979] to-[#658968] rounded-2xl flex items-center justify-center">
+                <BookOpen size={24} className="text-white" />
+              </div>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-4">L'importance de l'éducation affective et relationnelle dès le plus jeune âge</h3>
+              <p className="text-gray-600 leading-relaxed mb-4">
+                Découvrez pourquoi il est essentiel d'aborder les questions d'affectivité et de relations dès l'enfance. L'éducation à la vie affective, relationnelle et sexuelle (EVARS) permet aux jeunes de développer des compétences relationnelles saines et de mieux comprendre leurs émotions.
+              </p>
+              <p className="relative text-sm text-[#779979] font-medium cursor-pointer inline-block after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-[-2px] after:left-0 after:bg-[#779979] after:transition-all after:duration-300 hover:after:w-full">Lire plus →</p>
+            </article>
+
+            <article className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all">
+              <div className="w-16 h-16 mb-6 bg-gradient-to-br from-[#779979] to-[#658968] rounded-2xl flex items-center justify-center">
+                <Users size={24} className="text-white" />
+              </div>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-4">Comment parler de sexualité avec ses enfants ?</h3>
+              <p className="text-gray-600 leading-relaxed mb-4">
+                Un guide pratique pour les parents qui souhaitent aborder ces sujets avec bienveillance. Apprenez à adapter votre discours selon l'âge de votre enfant et à créer un espace de dialogue ouvert et rassurant.
+              </p>
+              <p className="relative text-sm text-[#779979] font-medium cursor-pointer inline-block after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-[-2px] after:left-0 after:bg-[#779979] after:transition-all after:duration-300 hover:after:w-full">Lire plus →</p>
+            </article>
+
+            <article className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all">
+              <div className="w-16 h-16 mb-6 bg-gradient-to-br from-[#779979] to-[#658968] rounded-2xl flex items-center justify-center">
+                <BookOpen size={24} className="text-white" />
+              </div>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-4">Le consentement : un concept clé à enseigner dès l'adolescence</h3>
+              <p className="text-gray-600 leading-relaxed mb-4">
+                Comprendre et respecter le consentement est fondamental dans toutes les relations. Cet article explore comment aborder ce sujet avec les adolescents de manière claire et constructive, en favorisant le respect mutuel.
+              </p>
+              <p className="relative text-sm text-[#779979] font-medium cursor-pointer inline-block after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-[-2px] after:left-0 after:bg-[#779979] after:transition-all after:duration-300 hover:after:w-full">Lire plus →</p>
+            </article>
+
+            <article className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all">
+              <div className="w-16 h-16 mb-6 bg-gradient-to-br from-[#779979] to-[#658968] rounded-2xl flex items-center justify-center">
+                <Users size={24} className="text-white" />
+              </div>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-4">L'EVARS en milieu scolaire : un enjeu éducatif majeur</h3>
+              <p className="text-gray-600 leading-relaxed mb-4">
+                Pourquoi et comment intégrer l'éducation à la vie affective, relationnelle et sexuelle dans les établissements scolaires. Retour sur les bénéfices pour les élèves et les bonnes pratiques à mettre en place.
+              </p>
+              <p className="relative text-sm text-[#779979] font-medium cursor-pointer inline-block after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-[-2px] after:left-0 after:bg-[#779979] after:transition-all after:duration-300 hover:after:w-full">Lire plus →</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" className="py-24 px-6 lg:px-12 bg-gradient-to-br from-[#779979]/5 to-transparent">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl lg:text-5xl font-semibold text-gray-900 mb-16 text-center">
             Questions fréquentes
@@ -472,37 +735,100 @@ function App() {
                 Nos interventions s'inscrivent dans le cadre de la loi relative à l'éducation à la sexualité et respectent les recommandations du Ministère de l'Éducation Nationale. Elles sont toujours menées en accord avec les équipes éducatives.
               </p>
             </div>
+            <div className="bg-white p-8 rounded-3xl shadow-lg">
+              <h3 className="text-2xl font-semibold text-gray-900 mb-4">À partir de quel âge peut-on bénéficier d'une intervention EVARS ?</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Les interventions EVARS sont adaptées à tous les âges, du CM2 à la terminale. Le contenu et l'approche sont adaptés selon le niveau scolaire et la maturité des participants.
+              </p>
+            </div>
+            <div className="bg-white p-8 rounded-3xl shadow-lg">
+              <h3 className="text-2xl font-semibold text-gray-900 mb-4">Les parents sont-ils informés des interventions ?</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Oui, la transparence est essentielle. Les parents sont toujours informés en amont des interventions prévues dans les établissements scolaires et peuvent poser toutes leurs questions.
+              </p>
+            </div>
+            <div className="bg-white p-8 rounded-3xl shadow-lg">
+              <h3 className="text-2xl font-semibold text-gray-900 mb-4">Proposez-vous des interventions individuelles ?</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Oui, en tant que conseillère conjugale et familiale, je propose également des accompagnements individuels, en couple ou en famille. Contactez-moi pour discuter de vos besoins spécifiques.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       <section id="contact" className="py-24 px-6 lg:px-12 bg-gradient-to-br from-[#779979] to-[#658968]">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl lg:text-5xl font-semibold text-white mb-8">
-            Prise de contact
-          </h2>
-          <p className="text-xl text-white/90 mb-12 leading-relaxed">
-            Vous souhaitez organiser une intervention dans votre établissement ou en savoir plus sur nos prestations ? N'hésitez pas à nous contacter.
-          </p>
-          <div className="grid md:grid-cols-2 gap-8 text-white mb-12 max-w-2xl mx-auto">
-            <div className="flex flex-col items-center bg-white/10 p-6 rounded-2xl backdrop-blur-sm">
-              <Phone size={32} className="mb-4" />
-              <p className="text-lg font-medium">03 66 88 33 77</p>
-            </div>
-            <div className="flex flex-col items-center bg-white/10 p-6 rounded-2xl backdrop-blur-sm">
-              <MapPin size={32} className="mb-4" />
-              <p className="text-lg font-medium">Mouvaux, France</p>
-            </div>
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-semibold text-white mb-8">
+              Prise de contact
+            </h2>
+            <p className="text-xl text-white/90 mb-12 leading-relaxed max-w-3xl mx-auto">
+              Vous souhaitez organiser une intervention dans votre établissement ou en savoir plus sur nos prestations ? N'hésitez pas à nous contacter.
+            </p>
           </div>
-          <div className="mb-12">
-            <h3 className="text-2xl font-semibold text-white mb-6">Secteurs d'intervention</h3>
-            <div className="flex flex-wrap justify-center gap-4 text-white/90">
-              <span className="px-5 py-2 bg-white/10 rounded-full backdrop-blur-sm font-medium">Bondues</span>
-              <span className="px-5 py-2 bg-white/10 rounded-full backdrop-blur-sm font-medium">Croix</span>
-              <span className="px-5 py-2 bg-white/10 rounded-full backdrop-blur-sm font-medium">La Madeleine</span>
-              <span className="px-5 py-2 bg-white/10 rounded-full backdrop-blur-sm font-medium">Lille</span>
-              <span className="px-5 py-2 bg-white/10 rounded-full backdrop-blur-sm font-medium">Marcq-en-Baroeul</span>
-              <span className="px-5 py-2 bg-white/10 rounded-full backdrop-blur-sm font-medium">Wasquehal</span>
+          
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Informations de contact */}
+            <div className="space-y-8">
+              <div className="bg-white/10 backdrop-blur-sm p-8 rounded-3xl">
+                <h3 className="text-2xl font-semibold text-white mb-6">Coordonnées</h3>
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <Phone size={24} className="text-white mt-1 flex-shrink-0" />
+                    <div>
+                      <p className="text-white/90 font-medium mb-1">Téléphone</p>
+                      <a href="tel:+33668883377" className="text-white text-lg hover:underline">03 66 88 33 77</a>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <MapPin size={24} className="text-white mt-1 flex-shrink-0" />
+                    <div>
+                      <p className="text-white/90 font-medium mb-1">Adresse</p>
+                      <p className="text-white text-lg">23 rue Kléber<br />59420 Mouvaux, France</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-sm p-8 rounded-3xl">
+                <h3 className="text-2xl font-semibold text-white mb-6">Secteurs d'intervention</h3>
+                <div className="flex flex-wrap gap-3 text-white/90">
+                  <span className="px-4 py-2 bg-white/10 rounded-full backdrop-blur-sm font-medium text-sm">Bondues</span>
+                  <span className="px-4 py-2 bg-white/10 rounded-full backdrop-blur-sm font-medium text-sm">Croix</span>
+                  <span className="px-4 py-2 bg-white/10 rounded-full backdrop-blur-sm font-medium text-sm">La Madeleine</span>
+                  <span className="px-4 py-2 bg-white/10 rounded-full backdrop-blur-sm font-medium text-sm">Lille</span>
+                  <span className="px-4 py-2 bg-white/10 rounded-full backdrop-blur-sm font-medium text-sm">Marcq-en-Baroeul</span>
+                  <span className="px-4 py-2 bg-white/10 rounded-full backdrop-blur-sm font-medium text-sm">Wasquehal</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Carte Google Maps */}
+            <div className="bg-white/10 backdrop-blur-sm p-2 rounded-3xl">
+              <div className="w-full h-96 rounded-2xl overflow-hidden">
+                <iframe
+                  src="https://www.google.com/maps?q=23+rue+Kleber+Mouvaux+59420+France&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Localisation - 23 rue Kléber, Mouvaux"
+                  className="rounded-2xl"
+                ></iframe>
+              </div>
+              <div className="mt-4 text-center">
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=23+rue+Kleber+Mouvaux+59420+France"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/90 hover:text-white text-sm underline"
+                >
+                  Ouvrir dans Google Maps
+                </a>
+              </div>
             </div>
           </div>
           <div className="flex gap-6 justify-center">
@@ -584,29 +910,9 @@ function App() {
           {/* Contenu de la barre latérale */}
           {sidebarOpen && (
             <div className="w-80 p-6 overflow-y-auto">
-              <h3 className="text-xl font-semibold text-gray-900 mb-6">Captures d'écran</h3>
-              <div className="space-y-6">
-                <div className="bg-gray-50 rounded-2xl p-4 shadow-md">
-                  <img
-                    src="/screenshot1.png"
-                    alt="Capture d'écran 1"
-                    className="w-full h-auto rounded-lg shadow-sm"
-                  />
-                </div>
-                <div className="bg-gray-50 rounded-2xl p-4 shadow-md">
-                  <img
-                    src="/screenshot2.png"
-                    alt="Capture d'écran 2"
-                    className="w-full h-auto rounded-lg shadow-sm"
-                  />
-                </div>
-                <div className="bg-gray-50 rounded-2xl p-4 shadow-md">
-                  <img
-                    src="/screenshot4.png"
-                    alt="Capture d'écran 3"
-                    className="w-full h-auto rounded-lg shadow-sm"
-                  />
-                </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-6">Informations</h3>
+              <div className="space-y-4 text-gray-600">
+                <p>Barre latérale disponible pour des informations supplémentaires.</p>
               </div>
             </div>
           )}
