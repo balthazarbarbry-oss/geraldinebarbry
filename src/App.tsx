@@ -1,4 +1,4 @@
-import { Menu, X, Phone, MapPin, ChevronDown, Users, BookOpen, Wrench } from 'lucide-react';
+import { Menu, X, Phone, MapPin, ChevronDown, Users, BookOpen, Wrench, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 import CalendlyModal from './components/CalendlyModal';
 
@@ -6,6 +6,7 @@ function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
   const [calendlyModalOpen, setCalendlyModalOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const calendlyUrl = import.meta.env.VITE_CALENDLY_URL || '';
 
   const scrollToSection = (id: string) => {
@@ -26,8 +27,8 @@ function App() {
               className="flex items-center"
             >
               <img
-                src="/image copy copy copy.png"
-                alt="Géraldine Barbry - Conseillère conjugale et familiale"
+                src="/screenshot3.png"
+                alt="Parcel. - Logo"
                 className="h-14 md:h-16 w-auto"
               />
             </button>
@@ -565,6 +566,52 @@ function App() {
         onClose={() => setCalendlyModalOpen(false)}
         calendlyUrl={calendlyUrl}
       />
+
+      {/* Barre latérale avec les captures d'écran */}
+      <div className={`fixed right-0 top-0 h-full bg-white shadow-2xl z-40 transition-all duration-300 ${
+        sidebarOpen ? 'w-80' : 'w-0'
+      } overflow-hidden`}>
+        <div className="h-full flex flex-col">
+          {/* Bouton pour ouvrir/fermer la barre latérale */}
+          <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className={`absolute ${sidebarOpen ? 'left-0' : '-left-12'} top-1/2 -translate-y-1/2 bg-[#779979] text-white p-2 rounded-l-lg hover:bg-[#658968] transition-all z-50 shadow-lg`}
+            aria-label={sidebarOpen ? 'Fermer la barre latérale' : 'Ouvrir la barre latérale'}
+          >
+            {sidebarOpen ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
+          </button>
+
+          {/* Contenu de la barre latérale */}
+          {sidebarOpen && (
+            <div className="w-80 p-6 overflow-y-auto">
+              <h3 className="text-xl font-semibold text-gray-900 mb-6">Captures d'écran</h3>
+              <div className="space-y-6">
+                <div className="bg-gray-50 rounded-2xl p-4 shadow-md">
+                  <img
+                    src="/screenshot1.png"
+                    alt="Capture d'écran 1"
+                    className="w-full h-auto rounded-lg shadow-sm"
+                  />
+                </div>
+                <div className="bg-gray-50 rounded-2xl p-4 shadow-md">
+                  <img
+                    src="/screenshot2.png"
+                    alt="Capture d'écran 2"
+                    className="w-full h-auto rounded-lg shadow-sm"
+                  />
+                </div>
+                <div className="bg-gray-50 rounded-2xl p-4 shadow-md">
+                  <img
+                    src="/screenshot4.png"
+                    alt="Capture d'écran 3"
+                    className="w-full h-auto rounded-lg shadow-sm"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
